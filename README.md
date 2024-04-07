@@ -13,25 +13,30 @@ Para ejecutar este proyecto en tu máquina local, necesitarás tener instalado l
 
 1. **Clonar el repositorio:**
 
+```bash
 git clone https://github.com/emerson-cartagena/SampleRestfullAPI
+```
 
 
 
-2. **Instalar las dependencias:**
+1. **Instalar las dependencias:**
 
-cd nombre-proyecto
+```bash
+cd SampleRestfullAPI
 npm install
+```
 
 
-3. **Configurar la base de datos:**
+1. **Configurar la base de datos:**
 
 - Crea una base de datos MySQL y un usuario con acceso a esa base de datos.
 - Copia el archivo `.env.example` a `.env` y modifica las variables de entorno con la información de tu base de datos.
 
 4. **Inicializar la base de datos:**
 
+```bash
 npm run db:init
-
+```
 
 Este comando creará la tabla de libros y la poblara con algunos datos de ejemplo.
 
@@ -39,8 +44,9 @@ Este comando creará la tabla de libros y la poblara con algunos datos de ejempl
 
 Para iniciar el servidor, ejecuta el siguiente comando:
 
+```bash
 npm start
-
+```
 
 La API estará disponible en `http://localhost:3000`.
 
