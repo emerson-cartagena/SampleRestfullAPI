@@ -2,12 +2,12 @@
   "name": "books-api-using-nodejs-express-mysql",
   "version": "1.0.0",
   "description": "API de libros de ejemplo usando express y mysql",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "SET NODE_ENV=%NODE_ENV:development% && node src/index.js",
-    "start": "node src/index.js",
-    "db:init": "SET NODE_ENV=%NODE_ENV:development% && node src/db-init.js"
+    "dev": "SET NODE_ENV=%NODE_ENV:development% && node index.js",
+    "start": "node index.js",
+    "db:init": "SET NODE_ENV=%NODE_ENV:development% && node db-init.js"
   },
   "keywords": [
     "nodejs",

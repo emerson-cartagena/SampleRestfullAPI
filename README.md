@@ -30,7 +30,7 @@ npm install
 1. **Configurar la base de datos:**
 
 - Crea una base de datos MySQL y un usuario con acceso a esa base de datos.
-- Copia el archivo `.env.example` a `.env` y modifica las variables de entorno con la información de tu base de datos.
+- Cree el archivo `.env`, copié el contenido del archivo `.env.example` a `.env` y modifica las variables de entorno con la información de tu base de datos.
 
 4. **Inicializar la base de datos:**
 

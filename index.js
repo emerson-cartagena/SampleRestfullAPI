@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const librosRoutes = require('./routes/libros.routes');
+const librosRoutes = require('./src/routes/libros.routes');
 require('dotenv').config(); // Cargar variables de entorno desde el archivo .env
 
 const app = express();
