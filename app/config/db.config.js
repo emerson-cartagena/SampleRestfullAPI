@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'production') {
         HOST: process.env.DB_HOST,
         USER: process.env.DB_USER,
         PASSWORD: process.env.DB_PASSWORD,
-        DB: dprocess.env.DB_NAME,
+        DB: process.env.DB_NAME,
     };
 } else {
     dbConfig = {
