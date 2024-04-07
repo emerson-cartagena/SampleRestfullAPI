@@ -2,6 +2,8 @@ require('dotenv').config(); // Cargar las variables de entorno desde el archivo 
 
 let dbConfig;
 
+console.log(process);
+
 if (process.env.NODE_ENV === 'production') {
     dbConfig = {
         HOST: process.env.DB_HOST,
