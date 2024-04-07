@@ -13,7 +13,7 @@ Para ejecutar este proyecto en tu máquina local, necesitarás tener instalado l
 
 1. **Clonar el repositorio:**
 
-git clone https://github.com/tuusuario/nombre-proyecto.git
+git clone https://github.com/emerson-cartagena/SampleRestfullAPI
 
 
 
