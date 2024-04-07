@@ -8,12 +8,8 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-app.get("/", (req,res)=> {
-    res.send("Hello there! Api is working")
-})
-
 // Rutas
-//app.use('/api', librosRoutes);
+app.use('/api', librosRoutes);
 
 // Puerto
 const PORT = process.env.PORT || 3000;
