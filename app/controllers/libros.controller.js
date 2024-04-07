@@ -1,4 +1,4 @@
-const LibroModel = require("../models/libro.model.js");
+const LibroModel = require("../models/libro.model");
 
 // Crear y guardar un nuevo libro
 exports.create = (req, res) => {
