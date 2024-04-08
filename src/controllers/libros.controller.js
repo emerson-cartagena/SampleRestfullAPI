@@ -9,7 +9,7 @@ exports.create = (req, res) => {
         });
     }
 
-    // Create a Tutorial
+    // Crear un libro
     const libro = new LibroModel({
         isbn: req.body.isbn,
         autor: req.body.autor,

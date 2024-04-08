@@ -56,8 +56,14 @@ La API estará disponible en `http://localhost:3000`.
 - `GET /api/libros/:isbn`: Obtener un libro por su isbn.
 - `POST /api/libros`: Crear un nuevo libro.
 - `PUT /api/libros/:isbn`: Actualizar un libro existente.
-- `DELETE /api/books/:isbn`: Eliminar un libro por su isbn.
+- `DELETE /api/libros/:isbn`: Eliminar un libro por su isbn.
 
+- `GET /api/clientes`: Obtener todos los clientes.
+- `GET /api/clientes/:id`: Obtener un cliente por su id.
+- `POST /api/clientes`: Crear un nuevo cliente.
+- `PUT /api/clientes/:id`: Actualizar un cliente existente.
+- `DELETE /api/clientes/:id`: Eliminar un cliente por su id.
+- 
 Consulta la documentación de la API para obtener más detalles sobre cómo utilizar cada endpoint.
 
 ## Contribuciones
