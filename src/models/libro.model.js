@@ -1,4 +1,4 @@
-const connection = require("./db.js");
+const sql = require("./db.js");
 
 // constructor
 const Libro = function (libro) {
@@ -9,7 +9,7 @@ const Libro = function (libro) {
 };
 
 Libro.create = (newLibro, result) => {
-    /*sql.query("INSERT INTO libros SET ?", newLibro, (err, res) => {
+    sql.query("INSERT INTO libros SET ?", newLibro, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -18,12 +18,11 @@ Libro.create = (newLibro, result) => {
 
         console.log("Libro creado: ", { isbn: res.insertId, ...newLibro });
         result(null, { isbn: res.insertId, ...newLibro });
-    });*/
-    result(null, { isbn: res.insertId, ...newLibro });
+    });
 };
 
 Libro.findByISBN = (isbn, result) => {
-    /*sql.query(`SELECT * FROM libros WHERE isbn = '${isbn}'`, (err, res) => {
+    sql.query(`SELECT * FROM libros WHERE isbn = '${isbn}'`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -38,24 +37,23 @@ Libro.findByISBN = (isbn, result) => {
 
         // Libro no encontrado
         result({ kind: "not_found" }, null);
-    });*/
-    result({ kind: "not_found" }, null);
+    });
 };
 
 Libro.getAll = (result) => {
     let query = "SELECT * FROM libros";
-    sql.query(query, (err, res) => {
+    sql.query(query, function (err, results, fields) {
         if (err) {
             console.log("error: ", err);
             result(null, err);
             return;
         }        
-        result(null, res);
+        result(null, results);
     });
 };
 
 Libro.updateByISBN = (isbn, libro, result) => {
-    /*sql.query(
+    sql.query(
         "UPDATE libros SET autor = ?, titulo = ?, precio = ? WHERE isbn = ?",
         [libro.autor, libro.titulo, libro.precio, isbn],
         (err, res) => {
@@ -74,12 +72,11 @@ Libro.updateByISBN = (isbn, libro, result) => {
             console.log("Libro actualizado: ", { isbn: isbn, ...libro });
             result(null, { isbn: isbn, ...libro });
         }
-    );*/
-    result(null, { isbn: isbn, ...libro });
+    );
 };
 
 Libro.remove = (isbn, result) => {
-    /*sql.query("DELETE FROM libros WHERE isbn = ?", isbn, (err, res) => {
+    sql.query("DELETE FROM libros WHERE isbn = ?", isbn, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -94,8 +91,7 @@ Libro.remove = (isbn, result) => {
 
         console.log("Se eliminó libro con ISBN: ", isbn);
         result(null, res);
-    });*/
-    result({ kind: "not_found" }, null);
+    });
 };
 
 module.exports = Libro;
