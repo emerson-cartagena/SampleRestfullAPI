@@ -1,8 +1,9 @@
-const LibroModel = require("../models/libro.model");
+//const LibroModel = require("../models/libro.model");
 
 // Crear y guardar un nuevo libro
 exports.create = (req, res) => {
-    // Se valida la solicitud
+    res.send("Crear un nuevo libro");
+   /* // Se valida la solicitud
     if (!req.body) {
         res.status(400).send({
             message: "Contenido no puede ser vacío!",
@@ -25,24 +26,26 @@ exports.create = (req, res) => {
                     err.message || "Ha ocurrido un error mietras se intentaba crear el Libro.",
             });
         else res.send(data);
-    });
+    });*/
 };
 
 // Obtiene todos los libros de la base de datos
 exports.findAll = (req, res) => {
-    LibroModel.getAll((err, data) => {
+    res.send("Obtener todos los libros");
+    /*LibroModel.getAll((err, data) => {
         if (err)
             res.status(500).send({
                 message:
                     err.message || "Ha ocurrido un error mientras se intentaba obtener los libros.",
             });
         else res.send(data);
-    });
+    });*/
 };
 
 // Busca un solo libro con un isbn
 exports.findOne = (req, res) => {    
-    LibroModel.findByISBN(req.params.isbn, (err, data) => {
+    res.send("Obtener un solo libro con isbn");
+    /*LibroModel.findByISBN(req.params.isbn, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -54,13 +57,14 @@ exports.findOne = (req, res) => {
                 });
             }
         } else res.send(data);
-    });
+    });*/
 };
 
 // Actualiza un libro identificado por el isbn en la solicitud
 exports.update = (req, res) => {
+    res.send("Actualizar un libro con isbn");
     // Se valida la solicitud
-    if (!req.body) {
+   /* if (!req.body) {
         res.status(400).send({
             message: "Contenido no puede ser vacío!",
         });
@@ -78,12 +82,13 @@ exports.update = (req, res) => {
                 });
             }
         } else res.send(data);
-    });
+    });*/
 };
 
 // Se elimina un libro con el isbn especificado en la solicitud
 exports.delete = (req, res) => {
-    console.log(req.params.isbn);
+    res.send("Eliminar un libro con isbn");
+   /* console.log(req.params.isbn);
     LibroModel.remove(req.params.isbn, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
@@ -96,5 +101,5 @@ exports.delete = (req, res) => {
                 });
             }
         } else res.send({ message: `El libro fué eliminado exitosamente!` });
-    });
+    });*/
 };
