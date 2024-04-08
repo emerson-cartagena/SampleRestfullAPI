@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const dbConfig = require('../config/db.config');
 
-console.log(dbConfig.HOST);
+module.exports = dbConfig;
 
 /*
 // Crear la conexión a la base de datos
