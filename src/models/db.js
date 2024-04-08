@@ -1,3 +1,4 @@
+/*
 require('dotenv').config(); // Cargar las variables de entorno desde el archivo .env
 const mysql = require('mysql');
 
@@ -40,3 +41,4 @@ connection.connect(error => {
 });
 
 module.exports = connection;
+*/
