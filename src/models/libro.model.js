@@ -55,7 +55,7 @@ Libro.getAll = (result) => {
         console.log("libros: ", res);
         result(null, res);
     });*/
-    result(connection.HOST + " " + connection.USER + " " + connection.PASSWORD + " " + connection.DB + " " + connection.PORT);
+    result(null, { "msg": connection.HOST + " " + connection.USER + " " + connection.PASSWORD + " " + connection.DB + " " + connection.PORT});
 };
 
 Libro.updateByISBN = (isbn, libro, result) => {
