@@ -83,7 +83,6 @@ exports.update = (req, res) => {
 
 // Se elimina un libro con el isbn especificado en la solicitud
 exports.delete = (req, res) => {
-    console.log(req.params.isbn);
     LibroModel.remove(req.params.isbn, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
