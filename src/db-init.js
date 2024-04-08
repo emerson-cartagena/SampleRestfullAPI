@@ -1,18 +1,5 @@
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
 const dbConfig = require('./config/db.config');
-
-const connection = mysql.createConnection({
-    host: dbConfig.HOST,
-    user: dbConfig.USER,
-    password: dbConfig.PASSWORD,
-});
-
-const connectionDB = mysql.createConnection({
-    host: dbConfig.HOST,
-    user: dbConfig.USER,
-    password: dbConfig.PASSWORD,
-    database: dbConfig.DB,
-});
 
 const SQL_CREATE_DATABASE = 'CREATE DATABASE IF NOT EXISTS libros CHARACTER SET utf8 COLLATE utf8_general_ci';
 const SQL_CREATE_TABLE_CLIENTES = `CREATE TABLE clientes (idcliente int(10) unsigned NOT NULL auto_increment, nombre varchar(25) NOT NULL, apellido varchar(25) NOT NULL, direccion varchar(50) NOT NULL, ciudad varchar(25) NOT NULL, PRIMARY KEY  (idcliente)) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=23;`
@@ -31,83 +18,73 @@ const SQL_ADD_ORDENES_CONSTRAINT = `ALTER TABLE ordenes ADD CONSTRAINT ordenes_i
 const SQL_ADD_RESUMEN_LIBRO_CONSTRAINT = `ALTER TABLE resumenlibro ADD CONSTRAINT resumenlibro_ibfk_1 FOREIGN KEY (isbn) REFERENCES libros (isbn) ON DELETE CASCADE ON UPDATE CASCADE;`;
 
 async function restoreDatabase() {
-    try {
-        await connectDB(connection);
-        console.log('Conexión a la base de datos exitosa');
-
-        await executeQuery(connection, SQL_CREATE_DATABASE);
-        console.log('Se ha creado la base de datos "libros"');
+    let connection, connectionDB;
+    try {        
+        connection = await mysql.createConnection({
+            host: dbConfig.HOST,
+            user: dbConfig.USER,
+            password: dbConfig.PASSWORD,
+            port: dbConfig.PORT,
+        });
         
-        connection.end();
+        await connection.query(SQL_CREATE_DATABASE);
+        console.log('Se ha creado la base de datos "libros"');
 
-        await connectDB(connectionDB);
-        console.log('Conexión a la base de datos exitosa');
+        connectionDB = await mysql.createConnection({
+            host: dbConfig.HOST,
+            user: dbConfig.USER,
+            password: dbConfig.PASSWORD,
+            database: dbConfig.DB,
+            port: dbConfig.PORT,
+        });
 
-        await executeQuery(connectionDB, SQL_CREATE_TABLE_CLIENTES);
+        await connectionDB.query(SQL_CREATE_TABLE_CLIENTES);
         console.log('Se han creado la tabla "clientes"');
 
-        await executeQuery(connectionDB, SQL_CREATE_TABLE_DETALLE_PEDIDO);
+        await connectionDB.query(SQL_CREATE_TABLE_DETALLE_PEDIDO);
         console.log('Se han creado la tabla "detallepedido"');
 
-        await executeQuery(connectionDB, SQL_CREATE_TABLE_LIBROS);
+        await connectionDB.query(SQL_CREATE_TABLE_LIBROS);
         console.log('Se han creado la tabla "libros"');
 
-        await executeQuery(connectionDB, SQL_CREATE_TABLE_ORDENES);
+        await connectionDB.query(SQL_CREATE_TABLE_ORDENES);
         console.log('Se han creado la tabla "ordenes"');
 
-        await executeQuery(connectionDB, SQL_CREATE_TABLE_RESUMEN_LIBRO);
+        await connectionDB.query(SQL_CREATE_TABLE_RESUMEN_LIBRO);
         console.log('Se han creado la tabla "resumenlibro"');
-        
-        await executeQuery(connectionDB, SQL_RESTORE_CLIENTES_DATA);
+
+        await connectionDB.query(SQL_RESTORE_CLIENTES_DATA);
         console.log('Se han restaurado los datos de la tabla "clientes"');
 
-        await executeQuery(connectionDB, SQL_RESTORE_DETALLE_PEDIDO_DATA);
+        await connectionDB.query(SQL_RESTORE_DETALLE_PEDIDO_DATA);
         console.log('Se han restaurado los datos de la tabla "detallepedido"');
-        
-        await executeQuery(connectionDB, SQL_RESTORE_LIBROS_DATA);
+
+        await connectionDB.query(SQL_RESTORE_LIBROS_DATA);
         console.log('Se han restaurado los datos de la tabla "libros"');
-
-        await executeQuery(connectionDB, SQL_RESTORE_ORDENES_DATA);
+        
+        await connectionDB.query(SQL_RESTORE_ORDENES_DATA);
         console.log('Se han restaurado los datos de la tabla "ordenes"');
-
-        await executeQuery(connectionDB, SQL_ADD_DETALLE_PEDIDO_CONSTRAINT);
+        
+        await connectionDB.query(SQL_ADD_DETALLE_PEDIDO_CONSTRAINT);
         console.log('Se han restaurado filtros para la tabla "detallepedido"');
         
-        await executeQuery(connectionDB, SQL_ADD_ORDENES_CONSTRAINT);
+        await connectionDB.query(SQL_ADD_ORDENES_CONSTRAINT);
         console.log('Se han restaurado filtros para la tabla "ordenes"');
         
-        await executeQuery(connectionDB, SQL_ADD_RESUMEN_LIBRO_CONSTRAINT);
+        await connectionDB.query(SQL_ADD_RESUMEN_LIBRO_CONSTRAINT);
         console.log('Se han restaurado filtros para la tabla "resumenlibro"');
 
-        connectionDB.end();
         console.log('Restauración de la base de datos completada exitosamente');
     } catch (error) {
-        console.error('Error durante la restauración de la base de datos:', error);
+        console.error('Error durante la restauración de la base de datos:', error);    
+    } finally {
+        if (connection) {
+            connection.end(); // Close the connection
+        }
+        if (connectionDB) {
+            connectionDB.end(); // Close the connection
+        }
     }
-}
-
-async function connectDB(connection) {
-    return new Promise((resolve, reject) => {
-        connection.connect((err) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
-}
-
-async function executeQuery(connection, sqlQuery) {
-    return new Promise((resolve, reject) => {
-        connection.query(sqlQuery, (err, result) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
 }
 
 restoreDatabase();
