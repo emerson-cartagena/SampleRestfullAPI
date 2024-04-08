@@ -43,19 +43,15 @@ Libro.findByISBN = (isbn, result) => {
 };
 
 Libro.getAll = (result) => {
-    /*let query = "SELECT * FROM libros";
-
+    let query = "SELECT * FROM libros";
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
             return;
-        }
-
-        console.log("libros: ", res);
+        }        
         result(null, res);
-    });*/
-    result(null, { "msg": connection.HOST + " " + connection.USER + " " + connection.PASSWORD + " " + connection.DB + " " + connection.PORT});
+    });
 };
 
 Libro.updateByISBN = (isbn, libro, result) => {
