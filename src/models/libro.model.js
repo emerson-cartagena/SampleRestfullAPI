@@ -18,8 +18,8 @@ Libro.create = (newLibro, result) => {
 
         console.log("Libro creado: ", { isbn: res.insertId, ...newLibro });
         result(null, { isbn: res.insertId, ...newLibro });
-    });*/    
-    result(null, { HOST: connection.HOST});
+    });*/
+    result(null, { isbn: res.insertId, ...newLibro });
 };
 
 Libro.findByISBN = (isbn, result) => {
@@ -55,7 +55,7 @@ Libro.getAll = (result) => {
         console.log("libros: ", res);
         result(null, res);
     });*/
-    result({ kind: "not_found" }, null);
+    result(connection.HOST + " " + connection.USER + " " + connection.PASSWORD + " " + connection.DB + " " + connection.PORT);
 };
 
 Libro.updateByISBN = (isbn, libro, result) => {
