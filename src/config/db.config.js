@@ -1,7 +1,7 @@
 require('dotenv').config(); // Cargar las variables de entorno desde el archivo .env
 
 let dbConfig;
-
+/*
 if (process.env.NODE_ENV === 'production') {
     dbConfig = {
         HOST: process.env.DB_HOST,
@@ -19,5 +19,5 @@ if (process.env.NODE_ENV === 'production') {
         PORT: process.env.DB_PORT || 3306,
     };
 }
-
-module.exports = dbConfig;
+*/
+//module.exports = dbConfig;
