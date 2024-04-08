@@ -20,7 +20,7 @@ Libro.create = (newLibro, result) => {
         result(null, { isbn: res.insertId, ...newLibro });
     });*/
     console.log(connection.HOST);
-    result(null, { isbn: res.insertId, ...newLibro, HOST: connection.HOST});
+    result(null, { newLibro, HOST: connection.HOST});
 };
 
 Libro.findByISBN = (isbn, result) => {
