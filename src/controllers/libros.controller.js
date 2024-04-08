@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Ha ocurrido un error mientras se intentaba obtener los libros.",
+                    err.message || "Ha ocurrido un error mientras se intentaba obtener los libros. SE ESTA ACTUALIZANDO EL SERVICIO.",
             });
         else res.send(data);
     });
