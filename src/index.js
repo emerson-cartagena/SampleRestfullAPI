@@ -9,7 +9,7 @@ const app = express();
 
 let limiter = rateLimit({
     windowMs: 30 * 60 * 1000, // 30 minutos
-    max: 10000, // 1000 solicitudes
+    max: 1000, // 1000 solicitudes
     message: 'Has excedido el número de solicitudes permitidas. Por favor intenta más tarde.'
 });
 

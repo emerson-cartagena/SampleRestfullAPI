@@ -36,7 +36,7 @@ Libro.findByISBN = (isbn, result) => {
 };
 
 Libro.getAll = (result) => {
-    let query = "SELECT * FROM libros";
+    let query = "SELECT * FROM libros order by titulo asc";
     sql.query(query, function (err, results, fields) {
         if (err) {
             result(null, err);
