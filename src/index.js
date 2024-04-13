@@ -1,15 +1,24 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const librosRoutes = require('./routes');
 require('dotenv').config(); // Cargar variables de entorno desde el archivo .env
 
 const app = express();
 
+let limiter = rateLimit({
+    windowMs: 30 * 60 * 1000, // 30 minutos
+    max: 10, // 100 solicitudes
+    message: 'Has excedido el número de solicitudes permitidas. Por favor intenta más tarde.'
+});
+
 // Configurar Express para servir archivos estáticos
 app.use(express.static('public'));
 
 // Middleware
 app.use(bodyParser.json());
+
+app.use('/api', limiter);
 
 // Rutas
 app.use('/api', librosRoutes);
