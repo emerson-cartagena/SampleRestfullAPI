@@ -3,6 +3,7 @@ const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const librosRoutes = require('./routes');
 require('dotenv').config(); // Cargar variables de entorno desde el archivo .env
+const cors = require('cors'); // Import the cors middleware
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.static('public'));
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use('/api', limiter);
 
